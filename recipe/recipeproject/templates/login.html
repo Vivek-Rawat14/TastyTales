@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>TastyTales</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #fff9f9;
+    }
+
+    .left {
+      flex: 1;
+      background: url("{% static 'src/k.gif' %}") center/cover no-repeat;
+      display: none;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background-color: #ffffff;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 400px;
+      padding: 40px 30px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .login-box h2 {
+      text-align: center;
+      color: #e63946;
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .login-box p {
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+      font-size: 15px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #e63946;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.1);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #e63946;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-btn:hover {
+      background-color: #cc2f3b;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+      color: #444;
+    }
+
+    .note a {
+      color: #e63946;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .note a:hover {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 992px) {
+      .left {
+        display: block;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .login-box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="left"></div>
+
+  <div class="right">
+    <div class="login-box">
+      <h2>TastyTales</h2>
+      <p>Welcome back! Log in to your account</p>
+
+      <form action="/login" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        </div>
+
+        <button type="submit" class="login-btn">Log In</button>
+
+        <p class="note">Don't have an account? <a href="/signup">Sign Up</a></p>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TastyTales</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #fff;
+    }
+.left {
+  flex: 1;
+  background: url("{% static 'src/j.jpg' %}") center/cover no-repeat;
+  display: none;
+  position: relative;
+}
+
+
+    .right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px;
+      background-color: #fffafc;
+    }
+
+    .form-wrapper {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .form-wrapper h2 {
+      color: #e63946;
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .form-wrapper p {
+      text-align: center;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #e63946;
+      outline: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: #e63946;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #c92e3b;
+    }
+
+    .note {
+      margin-top: 18px;
+      font-size: 14px;
+      color: #444;
+      text-align: center;
+    }
+
+    .note a {
+      color: #e63946;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .note a:hover {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 900px) {
+      .left {
+        display: block;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .right {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="left"></div>
+
+  <div class="right">
+    <div class="form-wrapper">
+      <h2>Welcome to TastyTales</h2>
+      <p>Create your account and start sharing food stories!</p>
+
+      <form action="/signup" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+
+        
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <div class="form-group">
+          <label for="confirm-password">Re-enter Password</label>
+          <input type="password" id="confirm-password" name="confirm_password" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" name="address" required />
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" required />
+        </div>
+
+        <div class="form-group">
+          <label for="state">State</label>
+          <input type="text" id="state" name="state" required />
+        </div>
+
+        <div class="form-group">
+          <label for="pincode">Pincode</label>
+          <input type="text" id="pincode" name="pincode" required />
+        </div>
+
+
+        <button type="submit" class="submit-btn">Sign Up</button>
+
+        <p class="note">Already a member? <a href="/login">Login here</a></p>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

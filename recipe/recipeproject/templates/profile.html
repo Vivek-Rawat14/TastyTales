@@ -1,0 +1,227 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TastyTales</title>
+  <link rel="icon" href="{% static 'src/logo-removebg-preview (2).png' %}" type="image/png" />
+  <style>
+    :root {
+      --primary: #e63946;
+      --bg: #fafafa;
+      --text-dark: #1d1d1d;
+      --text-light: #666;
+      --card: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    #app {
+      display: flex;
+      background-color: var(--bg);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 260px;
+      background-color: var(--card);
+      box-shadow: 2px 0 10px var(--shadow);
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .nav-item {
+      padding: 12px 18px;
+      border-radius: 8px;
+      color: var(--text-dark);
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background-color: var(--primary);
+      color: #fff;
+    }
+
+    .content {
+      flex: 1;
+      padding: 50px;
+      overflow-y: auto;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--primary);
+      background-color: #eee;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-info h2 {
+      font-size: 26px;
+      color: var(--text-dark);
+    }
+
+    .profile-info p {
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .info-card {
+      background-color: var(--card);
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 18px 20px;
+      transition: 0.3s;
+    }
+
+    .info-card:hover {
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    .info-card label {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .info-card span {
+      font-size: 15px;
+      color: var(--text-dark);
+    }
+
+    .edit-btn {
+      margin-top: 35px;
+      background-color: var(--primary);
+      color: white;
+      padding: 13px 22px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .edit-btn:hover {
+      background-color: #c22f3d;
+    }
+
+    @media (max-width: 768px) {
+      #app {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 15px;
+        box-shadow: none;
+      }
+
+      .content {
+        padding: 30px 20px;
+      }
+
+      .nav-item {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+
+<!-- Instead of body -->
+<div id="app">
+
+  <aside class="sidebar">
+    <div class="logo">TastyTales</div>
+      <a href="/" class="nav-item">Homepage</a>
+    <div class="nav-item active">Profile</div>
+    <a href="/carts" class="nav-item">Orders</a>
+    <a href="/recipelike" class="nav-item">Favorite Recipes</a>
+    <a href="/videolike" class="nav-item">Favorite Videos</a>
+    <a href="/like" class="nav-item">Favorite Food/Books</a>
+    <a href="/logout" class="nav-item">Logout</a>
+  </aside>
+
+  <main class="content">
+    <div class="profile-header">
+      <div class="avatar">
+        <img src="{% static 'src/l.gif' %}" alt="User">
+      </div>
+      <div class="profile-info">
+        <h2>{{ userde.0.username }}</h2>
+        <p>{{ userde.0.email }}</p>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <label>Phone</label>
+        <span>{{ userde.0.phone }}</span>
+      </div>
+      <div class="info-card">
+        <label>Address</label>
+        <span>{{ userde.0.address }}</span>
+      </div>
+      <div class="info-card">
+        <label>City</label>
+        <span>{{ userde.0.city }}</span>
+      </div>
+      <div class="info-card">
+        <label>State</label>
+        <span>{{ userde.0.state }}</span>
+      </div>
+      <div class="info-card">
+        <label>Pincode</label>
+        <span>{{ userde.0.pincode }}</span>
+      </div>
+    </div>
+
+    <a href="/edit-profile"><button class="edit-btn">Edit Profile</button></a>
+  </main>
+
+</div>
+</html>

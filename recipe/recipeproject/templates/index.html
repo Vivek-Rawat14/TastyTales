@@ -1,0 +1,398 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>TastyTales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href={% static 'style.css' %}>
+    <link rel="shortcut icon" href="{% static 'src/logo-removebg-preview (2).png' %}" type="image/x-icon">
+    <script src={% static 'script.js' %}></script>
+  <style>
+  
+
+    .navbar {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1d1407;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+      font-size: 1rem;
+      z-index: 1000;
+    }
+
+    .navbar-brand {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #fff !important;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 1px 1px 2px #00000060;
+    }
+
+    .navbar-brand img {
+      height: 42px;
+      filter: drop-shadow(1px 1px 1px #00000060);
+    }
+
+    .navbar-nav .nav-link {
+      color: #e0e0e0 !important;
+      font-weight: 500;
+      margin-right: 15px;
+      transition: 0.3s ease;
+      font-size: 1.05rem;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #ff7043 !important;
+      transform: translateY(-1px);
+    }
+
+    .search-form {
+      flex-grow: 1;
+      max-width: 450px;
+      margin-right: 20px;
+      
+    }
+
+    .search-input {
+      background-color: #2c2c2c;
+      color: #fff;
+      border: 1px solid #555;
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+    }
+
+    .search-input::placeholder {
+      color: #ccc;
+    }
+
+    .search-button {
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+    }
+
+    .user-icon {
+      font-size: 1.5rem;
+      color: #f8f9fa;
+      transition: color 0.3s ease;
+    }
+
+    .user-icon:hover {
+      color: #ff7043;
+    }
+
+   
+    .offcanvas a {
+      display: block;
+      padding: 10px 0;
+      font-weight: 500;
+      color: #222;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .offcanvas a:hover {
+      color: #ff5722;
+    }
+
+    @media (max-width: 991.98px) {
+      .search-form {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg sticky-top py-3 px-3">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'src/logo-removebg-preview (2).png' %}" alt="Logo">
+      Tastytales
+    </a>
+
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+   <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end align-items-center w-100">
+      <ul class="navbar-nav me-auto ms-5">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/recipe">Recipes</a></li>
+        <li class="nav-item"><a class="nav-link" href="/video">Videos</a></li>
+        <li class="nav-item"><a class="nav-link" href="/orderfood">Order Food</a></li>
+        <li class="nav-item"><a class="nav-link" href="/books">Recipe Books</a></li>
+      </ul>
+
+      
+      <form class="d-flex search-form" id="searchf">
+        <input class="form-control search-input" type="search" placeholder="Search recipes..." id="searchs">
+        <button class="btn search-button" type="submit" id="searchb">Search</button>
+      </form>
+
+      <a href="/profile" class="user-icon ms-3"><i class="fa-solid fa-user"></i></a>
+    </div>
+  </div>
+</nav>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form class="d-flex mb-3">
+      <input class="form-control" type="search" placeholder="Search...">
+      <button class="btn btn-warning ms-2" type="submit">Search</button>
+    </form>
+    <a href="/">🏠 Home</a>
+    <a href="/recipe">🥘 Recipes</a>
+    <a href="/video">🎥 Videos</a>
+    <a href="/orderfood">🍔 Order Food</a>
+    <a href="/books">📚 Recipe Books</a>
+    <a href="/profile"><i class="fa-solid fa-user me-2"></i> Profile</a>
+  </div>
+</div>
+
+
+<div class="banner">
+            <div class="banner-content">
+                <h1>Cook Like a Pro with Our <span class="highlight">Easy</span> and <span class="highlight">Tasty</span> Recipes</h1>
+                <p>From quick and easy meals to gourmet delights, we have something for every taste and occasion.</p>
+                <a href="#" class="btns">Explore All Recipes</a>
+            </div>
+            <div class="banner-image">
+                <img src="{% static 'src/vhjs.png' %}">
+            </div>
+          </div>
+        
+<div style="padding: 50px 20px; font-family: Arial, sans-serif;">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <img src="{% static 'src/logo-removebg-preview (2).png' %}" alt="Logo" style="height: 40px;">
+      <h2 style="margin: 0; color: #222; font-weight: bold;">Recipes</h2>
+    </div>
+    <a href="/recipe" style="background-color: #007bff; color: white; padding: 10px 25px; border-radius: 999px; text-decoration: none; font-size: 14px;">
+      View More 
+    </a>
+  </div>
+
+  <!-- Scrollable Card Section -->
+  <div style="overflow-x: auto; padding-bottom: 10px;scrollbar-width: none;">
+    <div style="display: flex; gap: 20px; min-width: max-content;">
+      {% for i in rece %}
+        {% if forloop.counter <= 8 %}
+          <div style="flex: 0 0 auto; width: 250px; background: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); overflow: hidden; display: flex; flex-direction: column;">
+            <img src="{{ i.image }}" alt="{{ i.name }}" style="width: 100%; height: 160px; object-fit: cover;">
+            <div style="padding: 15px; display: flex; flex-direction: column; height: 100%;">
+              <h3 style="margin: 0 0 10px 0; font-size: 18px; font-weight: bold; color: #333;">{{ i.name }}</h3>
+              <ul style="list-style: none; padding: 0; margin: 0 0 15px 0; font-size: 14px; color: #666; line-height: 1.5;">
+                <li>⏱️ {{ i.cookTimeMinutes }} min</li>
+                <li>🔥 {{ i.difficulty }}</li>
+                <li>⭐ {{ i.rating }}</li>
+                <li>🍽️ 
+                  {% for meal in i.mealType %}
+                    <span>{{ meal }}</span>{% if not forloop.last %}, {% endif %}
+                  {% endfor %}
+                </li>
+              </ul>
+              <a href="recipeshow/{{ i.id }}" style="margin-top: auto; text-align: center; padding: 8px; border: 1px solid #007bff; border-radius: 6px; color: #007bff; text-decoration: none; font-weight: bold;">
+                View Recipe
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+<div style="padding: 50px 20px; font-family: Arial, sans-serif;">
+  
+  <!-- Header -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <img src="{% static 'src/logo-removebg-preview (2).png' %}" alt="Logo" style="height: 40px;">
+      <h2 style="margin: 0; color: #222; font-weight: bold;">Recipe Video</h2>
+    </div>
+    <a href="/video" style="background-color: #007bff; color: white; padding: 10px 25px; border-radius: 999px; text-decoration: none; font-size: 14px;">
+      View More 
+    </a>
+  </div>
+
+  <!-- Scrollable Card Section -->
+  <div style="overflow-x: auto; padding-bottom: 10px; scrollbar-width: none;">
+    <div style="display: flex; gap: 20px; min-width: max-content;">
+      {% for i in da %}
+        {% if forloop.counter <= 8 %}
+            <div class="c"> <!-- 4 cards per row on lg and above -->
+            <div class="rec card shadow-sm h-100">
+                <a href="videoshow/{{ i.id }}">
+                    <div class="vid position-relative">
+                        <img src="{% static 'webimg/' %}{{ i.foodimg }}" class="img-fluid rounded-top" alt="Recipe Video">
+                        <div class="play-overlay">
+                            <i class="fa fa-play-circle play-icon"></i>
+                        </div>
+                    </div>
+                    <div class="vid_name text-center p-3">
+                        <h5 class="name">{{ i.videoName }}</h5>
+                        <p class="description">{{ i.foodinfo }}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+<div style="padding: 50px 20px; font-family: Arial, sans-serif;">
+  
+  <!-- Header -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <img src="{% static 'src/logo-removebg-preview (2).png' %}" alt="Logo" style="height: 40px;">
+      <h2 style="margin: 0; color: #222; font-weight: bold;">Order Food</h2>
+    </div>
+    <a href="/orderfood" style="background-color: #007bff; color: white; padding: 10px 25px; border-radius: 999px; text-decoration: none; font-size: 14px;">
+      View More 
+    </a>
+  </div>
+
+  <!-- Scrollable Card Section -->
+  <div style="overflow-x: auto; padding-bottom: 10px; scrollbar-width: none;">
+    <div style="display: flex; gap: 20px; min-width: max-content;">
+      {% for i in data %}
+        {% if forloop.counter <= 8 %}
+          <div style="flex: 0 0 auto; width: 250px; background: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); overflow: hidden; display: flex; flex-direction: column;">
+            <img src="{% static 'webimg/' %}{{ i.foodimg }}" style="width: 100%; height: 160px; object-fit: cover;">
+            
+            <div style="padding: 15px; display: flex; flex-direction: column; height: 100%;">
+              <h3 style="margin: 0 0 10px 0; font-size: 18px; font-weight: bold; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                {{ i.name }}
+              </h3>
+
+              <!-- One Line: Price on top, Type below -->
+              <div style="display: flex; flex-direction: column; font-size: 14px; color: #555; margin-bottom: 15px; overflow: hidden;">
+                <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><strong>Rs {{ i.foodprice }}</strong></span>
+                <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ i.foodname }}</span>
+              </div>
+
+              <a href="buyconto/{{ i.id }}" style="margin-top: auto; text-align: center; padding: 8px; border: 1px solid #007bff; border-radius: 6px; color: #007bff; text-decoration: none; font-weight: bold;">
+                Order Food
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+<div style="padding: 50px 20px; font-family: Arial, sans-serif;">
+  
+  <!-- Header -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <img src="{% static 'src/logo-removebg-preview (2).png' %}" alt="Logo" style="height: 40px;">
+      <h2 style="margin: 0; color: #222; font-weight: bold;">Order Books</h2>
+    </div>
+    <a href="/books" style="background-color: #007bff; color: white; padding: 10px 25px; border-radius: 999px; text-decoration: none; font-size: 14px;">
+      View More 
+    </a>
+  </div>
+
+  <!-- Scrollable Card Section -->
+  <div style="overflow-x: auto; padding-bottom: 10px; scrollbar-width: none;">
+    <div style="display: flex; gap: 20px; min-width: max-content;">
+      {% for i in cd %}
+        {% if forloop.counter <= 8 %}
+          <div style="flex: 0 0 auto; width: 250px; background: #fff; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); overflow: hidden; display: flex; flex-direction: column;">
+            <img src="{% static 'webimg/' %}{{ i.foodimg }}" style="width: 100%; height: 160px; object-fit: cover;">
+            
+            <div style="padding: 15px; display: flex; flex-direction: column; height: 100%;">
+              <h3 style="margin: 0 0 10px 0; font-size: 18px; font-weight: bold; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                {{ i.name }}
+              </h3>
+
+              <!-- One Line: Price on top, Type below -->
+              <div style="display: flex; flex-direction: column; font-size: 14px; color: #555; margin-bottom: 15px; overflow: hidden;">
+                <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><strong>Rs {{ i.foodprice }}</strong></span>
+                <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ i.foodname }}</span>
+              </div>
+
+              <a href="ordershow/{{ i.id }}" style="margin-top: auto; text-align: center; padding: 8px; border: 1px solid #007bff; border-radius: 6px; color: #007bff; text-decoration: none; font-weight: bold;">
+                Order Book
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+  <div class="bg-dark text-light pt-5 pb-4 mt-5">
+  <div class="container text-md-left">
+    <div class="row text-md-left d-flex justify-content-between flex-wrap">
+      
+
+      <div class="col-md-3 mb-4">
+        <h3 class="fw-bold text-uppercase mb-3">TASTYTALES</h3>
+        <p>Your daily dose of delicious recipes, curated by food lovers, for food lovers.</p>
+      </div>
+
+      <div class="col-md-2 mb-4">
+        <h5 class="text-uppercase fw-semibold mb-3">Company</h5>
+        <ul class="list-unstyled">
+          <li><a href="about" class="text-light text-decoration-none">About Us</a></li>
+          <li><a href="support" class="text-light text-decoration-none">Help & Support</a></li>
+          <li><a href="terms" class="text-light text-decoration-none">Terms & Conditions</a></li>
+          <li><a href="privacy" class="text-light text-decoration-none">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+  
+      <div class="col-md-3 mb-4">
+        <h5 class="text-uppercase fw-semibold mb-3">Contact</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-phone me-2"></i>+91 98765 43210</li>
+          <li class="d-flex align-items-center"><i class="fa-solid fa-envelope me-2"></i>support@tastytales.com</li>
+        </ul>
+      </div>
+
+ 
+      <div class="col-md-3 mb-4">
+        <h5 class="text-uppercase fw-semibold mb-3">Follow Us</h5>
+        <div class="d-flex gap-3">
+          <a href="https://instagram.com" target="_blank" class="text-light fs-5"><i class="fab fa-instagram"></i></a>
+          <a href="https://facebook.com" target="_blank" class="text-light fs-5"><i class="fab fa-facebook"></i></a>
+          <a href="https://x.com" target="_blank" class="text-light fs-5"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://youtube.com" target="_blank" class="text-light fs-5"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-secondary mt-4" />
+    <div class="text-center">
+      <p class="mb-0">&copy; 2025 Tastytales. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+

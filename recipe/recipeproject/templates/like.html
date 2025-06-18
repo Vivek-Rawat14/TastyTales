@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TastyTales</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --main-color: #ff5f2e;
+      --bg-light: #fff8f5;
+      --text-dark: #333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+    }
+
+    #layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: #fff;
+      padding: 30px 20px;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--main-color);
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      padding: 12px 18px;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background-color: var(--main-color);
+      color: #fff;
+    }
+
+    /* Content Area */
+    .wishlist-container {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .wishlist-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .wishlist-header h2 {
+      font-weight: 700;
+      font-size: 2.4rem;
+      color: var(--main-color);
+    }
+
+    .wishlist-card {
+      background: #fff;
+      display: flex;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+      transition: 0.3s ease;
+    }
+
+    .wishlist-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .wishlist-img {
+      width: 180px;
+      height: 140px;
+      object-fit: cover;
+    }
+
+    .wishlist-details {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .wishlist-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-dark);
+    }
+
+    .wishlist-meta {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .wishlist-price {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ff3d00;
+    }
+
+    .wishlist-actions {
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+    }
+
+    .wishlist-actions form {
+      margin-left: auto;
+    }
+
+    .wishlist-actions .btn {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+
+    @media (max-width: 768px) {
+      #layout {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 20px;
+        box-shadow: none;
+      }
+
+      .wishlist-container {
+        padding: 30px 15px;
+      }
+
+      .wishlist-card {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .wishlist-img {
+        width: 100%;
+        height: 180px;
+      }
+
+      .wishlist-actions {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">TastyTales</div>
+    <a href="/" class="nav-link"> Homepage</a>
+    <a href="/profile" class="nav-link">Profile</a>
+    <a href="/carts" class="nav-link">Orders</a>
+    <a href="/like" class="nav-link">Recipes Wishlist</a>
+    <a href="/videolike" class="nav-link">Video Wishlist</a>
+    <a href="/like" class="nav-link active">Food Wishlist</a>
+    <a href="/logout" class="nav-link">Logout</a>
+  </aside>
+
+  <!-- Content -->
+  <main class="wishlist-container">
+    <div class="wishlist-header">
+      <h2>🍔 Your Food Wishlist</h2>
+      <p class="text-muted">Craving something later? It's all saved here!</p>
+    </div>
+
+    {% if data %}
+      {% for i in data %}
+        <div class="wishlist-card">
+          <img src="{% static 'webimg/' %}{{ i.foodimg }}" alt="{{ i.foodname }}" class="wishlist-img">
+          <div class="wishlist-details">
+            <div class="wishlist-title">{{ i.foodname }}</div>
+            <div class="wishlist-meta">{{ i.foodinfo }}</div>
+            <div class="wishlist-price">₹{{ i.foodprice }}</div>
+          </div>
+          <div class="wishlist-actions">
+            <form method="POST" action="/removewishlist/{{ i.id }}/">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-trash"></i> Remove
+              </button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="alert alert-info text-center" role="alert" style="max-width: 400px; margin: 4rem auto;">
+        Your wishlist is empty.
+      </div>
+    {% endif %}
+  </main>
+
+</div>
+
+</body>
+</html>
