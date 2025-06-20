@@ -2,23 +2,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>TastyTales</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
   <style>
-
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+    :root {
+      --primary: #ff5722;
+      --bg: #fff8f5;
+      --text-dark: #333;
+      --shadow: rgba(0, 0, 0, 0.08);
     }
 
-    #app {
-      display: flex;
-      min-height: 100vh;
+    body {
       background-color: var(--bg);
+      font-family: 'Segoe UI', sans-serif;
     }
 
     .sidebar {
@@ -26,9 +26,7 @@
       background-color: #fff;
       padding: 30px 20px;
       box-shadow: 2px 0 10px var(--shadow);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      min-height: 100vh;
     }
 
     .logo {
@@ -39,41 +37,25 @@
       margin-bottom: 30px;
     }
 
-    .nav-item {
+    .nav-link {
       padding: 12px 18px;
       border-radius: 8px;
       color: var(--text-dark);
       text-decoration: none;
-      transition: background 0.3s, color 0.3s;
     }
 
-    .nav-item:hover,
-    .nav-item.active {
+    .nav-link:hover,
+    .nav-link.active {
       background-color: var(--primary);
-      color: #fff;
-    }
-
-    .content {
-      flex: 1;
-      padding: 40px;
+      color: #fff !important;
     }
 
     .wishlist-heading {
       font-weight: 700;
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       color: var(--text-dark);
       margin-bottom: 30px;
       text-align: center;
-    }
-
-    .card {
-      border: none;
-      border-radius: 15px;
-      transition: transform 0.2s ease-in-out;
-    }
-
-    .card:hover {
-      transform: scale(1.02);
     }
 
     .card-img-top {
@@ -83,16 +65,13 @@
       border-top-right-radius: 15px;
     }
 
-    .card-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--text-dark);
-    }
-
     .btn-view {
-      background-color: #ff5722;
+      background-color: var(--primary);
       border: none;
       color: white;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      border-radius: 8px;
     }
 
     .btn-view:hover {
@@ -100,67 +79,85 @@
     }
 
     @media (max-width: 768px) {
-      #app {
-        flex-direction: column;
-      }
-
       .sidebar {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 15px;
-        box-shadow: none;
-      }
-
-      .nav-item {
-        font-size: 14px;
-        padding: 10px;
-      }
-
-      .content {
-        padding: 30px 15px;
+        display: none;
       }
     }
   </style>
 </head>
+<body>
 
-<!-- Main container -->
-<div id="app">
+<!-- Mobile Navbar -->
+<nav class="navbar navbar-light bg-white shadow-sm d-md-none">
+  <div class="container-fluid">
+    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+      ☰
+    </button>
+    <span class="navbar-brand mb-0 h1 text-primary">TastyTales</span>
+  </div>
+</nav>
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="logo">TastyTales</div>
-      <a href="/" class="nav-item"> Homepage</a>
-    <a href="/profile" class="nav-item">Profile</a>
-    <a href="/carts" class="nav-item">Orders</a>
-    <a href="/like" class="nav-item active">Favorites Recipes</a>
-    <a href="/videolike" class="nav-item">Favorite Videos</a>
-    <a href="/favorites" class="nav-item">Books/Foods</a>
-    <a href="/logout" class="nav-item">Logout</a>
-  </aside>
 
-  <!-- Wishlist content -->
-  <main class="content">
-    <h2 class="wishlist-heading">❤️ My Recipe Wishlist</h2>
-    <div class="row">
-      {% for i in data %}
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card h-100 shadow-sm">
-          <img src="{{ i.image }}" class="card-img-top" alt="{{ i.name }}">
-          <div class="card-body d-flex flex-column justify-content-between">
-            <h5 class="card-title">{{ i.name }}</h5>
-            <a href="/recipeshow/{{ i.id }}" class="btn btn-view mt-3">View Recipe</a>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="nav flex-column">
+      <a href="/" class="nav-link">Homepage</a>
+      <a href="/profile" class="nav-link">Profile</a>
+      <a href="/carts" class="nav-link">Orders</a>
+      <a href="/recipelike" class="nav-link active">Favorites Recipes</a>
+      <a href="/videolike" class="nav-link">Favorite Videos</a>
+      <a href="/like" class="nav-link">Books/Foods</a>
+      <a href="/logout" class="nav-link">Logout</a>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content Layout -->
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Desktop Sidebar -->
+    <div class="col-md-3 d-none d-md-block sidebar">
+      <div class="logo">TastyTales</div>
+      <nav class="nav flex-column">
+        <a href="/" class="nav-link">Homepage</a>
+        <a href="/profile" class="nav-link">Profile</a>
+        <a href="/carts" class="nav-link">Orders</a>
+        <a href="/recipelike" class="nav-link active">Favorites Recipes</a>
+        <a href="/videolike" class="nav-link">Favorite Videos</a>
+        <a href="/like" class="nav-link">Books/Foods</a>
+        <a href="/logout" class="nav-link">Logout</a>
+      </nav>
+    </div>
+
+    <main class="col-md-9 p-4">
+      <h2 class="wishlist-heading">❤️ My Recipe Wishlist</h2>
+      <div class="row">
+        {% for i in data %}
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <img src="{{ i.image }}" class="card-img-top" alt="{{ i.name }}">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title">{{ i.name }}</h5>
+              <a href="/recipeshow/{{ i.id }}" class="btn btn-view mt-3">View Recipe</a>
+            </div>
           </div>
         </div>
+        {% empty %}
+        <div class="text-center mt-5">
+          <h5>No liked recipes yet.</h5>
+          <p>Start exploring and add your favorites!</p>
+        </div>
+        {% endfor %}
       </div>
-      {% empty %}
-      <div class="text-center mt-5">
-        <h5>No liked recipes yet.</h5>
-        <p>Start exploring and add your favorites!</p>
-      </div>
-      {% endfor %}
-    </div>
-  </main>
+    </main>
 
+  </div>
 </div>
+
+</body>
 </html>

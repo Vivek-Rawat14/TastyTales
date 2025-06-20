@@ -192,41 +192,44 @@ def profile(req):
     except users.DoesNotExist:
         return render(req, 'profile.html', context={"error": "User not found"})
 
-
 def addlikeitemv(req, Id):
     if 'user' not in req.session:
         return redirect('/login')
 
     try:
         user = models.users.objects.get(username=req.session['user'])
-        liked = json.loads(user.likesv or '[]')  # handle None or empty
-        
+        try:
+            liked = json.loads(user.likesv or '[]')
+        except (json.JSONDecodeError, TypeError):
+            liked = []
+
         if str(Id) not in liked:
             liked.append(str(Id))
             user.likesv = json.dumps(liked)
             user.save()
-            
+
         return redirect('/videolike')
 
     except models.users.DoesNotExist:
         return redirect('/login')
 
+
 def videolike(req):
     if 'user' not in req.session:
         return redirect('/homepage')
-    
+
     username = req.session['user']
     try:
-        user = users.objects.get(username=username)
-
+        user = models.users.objects.get(username=username)
         try:
-            liked_ids = json.loads(user.likesv)  # convert string to list
-        except json.JSONDecodeError:
+            liked_ids = json.loads(user.likesv or '[]')
+        except (json.JSONDecodeError, TypeError):
             liked_ids = []
 
-        liked_items = recipes.objects.filter(id__in=liked_ids)
+        liked_items = models.recipes.objects.filter(id__in=liked_ids)
         return render(req, 'videolike.html', context={'data': liked_items})
-    except users.DoesNotExist:
+
+    except models.users.DoesNotExist:
         return redirect('/login')
 
 
@@ -236,11 +239,10 @@ def addlikeitemrs(req, Id):
 
     username = req.session['user']
     try:
-        user = users.objects.get(username=username)
-
+        user = models.users.objects.get(username=username)
         try:
             liked_ids = json.loads(user.likesr or '[]')
-        except json.JSONDecodeError:
+        except (json.JSONDecodeError, TypeError):
             liked_ids = []
 
         if str(Id) not in liked_ids:
@@ -250,9 +252,8 @@ def addlikeitemrs(req, Id):
 
         return redirect('/recipelike')
 
-    except users.DoesNotExist:
+    except models.users.DoesNotExist:
         return redirect('/login')
-
 
 
 def recipelike(req):
@@ -261,11 +262,10 @@ def recipelike(req):
 
     username = req.session['user']
     try:
-        user = users.objects.get(username=username)
-
+        user = models.users.objects.get(username=username)
         try:
             liked_ids = json.loads(user.likesr or '[]')
-        except json.JSONDecodeError:
+        except (json.JSONDecodeError, TypeError):
             liked_ids = []
 
         liked_recipes = []
@@ -274,13 +274,14 @@ def recipelike(req):
                 response = requests.get(f"https://dummyjson.com/recipes/{rid}")
                 if response.status_code == 200:
                     liked_recipes.append(response.json())
-            except:
+            except requests.RequestException:
                 continue
 
         return render(req, 'recipelike.html', {'data': liked_recipes})
 
-    except users.DoesNotExist:
+    except models.users.DoesNotExist:
         return redirect('/login')
+
 
 def addlikeitem(req, Id):
     if 'user' not in req.session:
@@ -288,14 +289,36 @@ def addlikeitem(req, Id):
 
     try:
         user = models.users.objects.get(username=req.session['user'])
-        liked = json.loads(user.likes or '[]')  # handle None or empty
-        
+        try:
+            liked = json.loads(user.likes or '[]')
+        except (json.JSONDecodeError, TypeError):
+            liked = []
+
         if str(Id) not in liked:
             liked.append(str(Id))
             user.likes = json.dumps(liked)
             user.save()
-            
+
         return redirect('/like')
+
+    except models.users.DoesNotExist:
+        return redirect('/login')
+
+
+def like(req):
+    if 'user' not in req.session:
+        return redirect('/homepage')
+
+    username = req.session['user']
+    try:
+        user = models.users.objects.get(username=username)
+        try:
+            liked_ids = json.loads(user.likes or '[]')
+        except (json.JSONDecodeError, TypeError):
+            liked_ids = []
+
+        liked_items = models.recipes.objects.filter(id__in=liked_ids)
+        return render(req, 'like.html', context={'dta': liked_items})
 
     except models.users.DoesNotExist:
         return redirect('/login')
@@ -320,23 +343,6 @@ def addremoveitem(request, Id):
 
     return redirect('/like')
 
-def like(req):
-    if 'user' not in req.session:
-        return redirect('/homepage')
-    
-    username = req.session['user']
-    try:
-        user = users.objects.get(username=username)
-
-        try:
-            liked_ids = json.loads(user.likes)  # convert string to list
-        except json.JSONDecodeError:
-            liked_ids = []
-
-        liked_items = recipes.objects.filter(id__in=liked_ids)
-        return render(req, 'like.html', context={'data': liked_items})
-    except users.DoesNotExist:
-        return redirect('/login')
 
 def addbuyitem(req, Id):
     if 'user' not in req.session:

@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-   <title>TastyTales</title>
+  <title>TastyTales</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
     :root {
       --main-color: #ff5f2e;
@@ -15,38 +15,17 @@
       --text-dark: #333;
     }
 
-    .clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
     body {
       background-color: var(--bg-light);
-    }
-
-    #layout {
-      display: flex;
-      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
     }
 
     .sidebar {
       width: 250px;
       background-color: #fff;
+      height: 100vh;
       padding: 30px 20px;
-      box-shadow: 2px 0 8px rgba(0,0,0,0.05);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
     }
 
     .logo {
@@ -54,53 +33,33 @@
       font-weight: bold;
       color: var(--main-color);
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .nav-link {
-      text-decoration: none;
-      color: #333;
-      padding: 12px 18px;
+      padding: 10px 16px;
       border-radius: 8px;
-      transition: 0.3s ease;
+      color: #333;
+      text-decoration: none;
+      display: block;
     }
 
     .nav-link:hover,
     .nav-link.active {
       background-color: var(--main-color);
-      color: #fff;
-    }
-
-    .orders-container {
-      flex: 1;
-      padding: 40px;
-    }
-
-    .orders-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .orders-header h2 {
-      font-weight: 700;
-      font-size: 2.4rem;
-      color: var(--main-color);
+      color: white;
     }
 
     .order-card {
-      display: flex;
-      gap: 20px;
       background: #fff;
       border-radius: 16px;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
       padding: 20px;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
       align-items: center;
-      transition: 0.3s ease;
-    }
-
-    .order-card:hover {
-      transform: translateY(-3px);
     }
 
     .order-img {
@@ -108,129 +67,142 @@
       height: 100px;
       object-fit: cover;
       border-radius: 12px;
-      border: 2px solid #eee;
     }
 
     .order-details {
       flex: 1;
+      min-width: 200px;
     }
 
     .order-details h5 {
+      margin: 0;
       font-size: 1.1rem;
-      margin-bottom: 4px;
       font-weight: 600;
-      color: var(--text-dark);
     }
 
     .order-details p {
       margin: 3px 0;
-      color: #555;
       font-size: 0.9rem;
+      color: #555;
     }
 
     .status-badge {
-      background: #e6f4ea;
-      color: #34a853;
       font-size: 0.75rem;
       font-weight: 600;
       padding: 4px 10px;
       border-radius: 20px;
       display: inline-block;
-      margin-top: 5px;
+      margin-top: 4px;
     }
 
-    .status-pending {
+    .delivered {
+      background: #e6f4ea;
+      color: #34a853;
+    }
+
+    .pending {
       background: #fff8e1;
       color: #f9a825;
     }
 
     .price {
-      font-size: 1.1rem;
       font-weight: bold;
-      color: #ff5722;
-      text-align: right;
-    }
-
-    .order-id {
-      font-size: 0.8rem;
-      color: #888;
-      font-weight: 500;
+      color: var(--main-color);
+      font-size: 1.05rem;
     }
 
     @media (max-width: 768px) {
-      #layout {
-        flex-direction: column;
-      }
-
       .sidebar {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 20px;
-        box-shadow: none;
-      }
-
-      .orders-container {
-        padding: 30px 15px;
+        display: none;
       }
 
       .order-card {
         flex-direction: column;
-        text-align: center;
+        align-items: flex-start;
       }
 
-      .price {
-        margin-top: 10px;
+      .order-img {
+        width: 100%;
+        height: 200px;
+      }
+
+      .order-details {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
 
-<div id="layout">
+<!-- Mobile Navbar -->
+<nav class="navbar navbar-light bg-white d-md-none shadow-sm">
+  <div class="container-fluid">
+    <button class="btn btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+      <i class="bi bi-list"></i>
+    </button>
+    <span class="navbar-brand mb-0 h1">TastyTales</span>
+  </div>
+</nav>
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="logo">TastyTales</div>
+<!-- Mobile Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <a href="/" class="nav-link">Homepage</a>
     <a href="/profile" class="nav-link">Profile</a>
     <a href="/carts" class="nav-link active">Orders</a>
-    <a href="/like" class="nav-link">Recipes Wishlist</a>
+    <a href="/recipelike" class="nav-link">Recipes Wishlist</a>
     <a href="/videolike" class="nav-link">Video Wishlist</a>
     <a href="/like" class="nav-link">Food Wishlist</a>
     <a href="/logout" class="nav-link">Logout</a>
-  </aside>
+  </div>
+</div>
 
-  <!-- Content -->
-  <main class="orders-container">
-    <div class="orders-header">
-      <h2><i class="bi bi-bag me-2"></i>My Orders</h2>
-      <p class="text-muted">Track all your food orders here.</p>
+<!-- Layout -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- Desktop Sidebar -->
+    <div class="col-md-3 d-none d-md-block sidebar">
+      <div class="logo">TastyTales</div>
+      <a href="/" class="nav-link">Homepage</a>
+      <a href="/profile" class="nav-link">Profile</a>
+      <a href="/carts" class="nav-link active">Orders</a>
+      <a href="/recipelike" class="nav-link">Recipes Wishlist</a>
+      <a href="/videolike" class="nav-link">Video Wishlist</a>
+      <a href="/like" class="nav-link">Food Wishlist</a>
+      <a href="/logout" class="nav-link">Logout</a>
     </div>
 
-    {% if data %}
-      {% for i in data %}
-        <div class="order-card">
-          <img src="{% static 'webimg/' %}{{ i.product.foodimg }}" class="order-img" alt="{{ i.product.foodname }}">
-          <div class="order-details">
-            <h5>{{ i.product.foodname }}</h5>
-            <p>Quantity: {{ i.qty }}</p>
-            <p class="clamp-2 ">{{ i.product.foodinfo }}</p>
-            {% if i.status == "Delivered" %}
-              <span class="status-badge">Delivered</span>
-            {% else %}
-              <span class="status-badge status-pending">Pending</span>
-            {% endif %}
+    <!-- Main Content -->
+    <main class="col-md-9 p-4">
+      <h2 class="text-center mb-4">🛒 Your Orders</h2>
+      {% if data %}
+        {% for i in data %}
+          <div class="order-card">
+            <img src="{% static 'webimg/' %}{{ i.product.foodimg }}" class="order-img" alt="{{ i.product.foodname }}">
+            <div class="order-details">
+              <h5>{{ i.product.foodname }}</h5>
+              <p><span class="price">₹{{ i.product.foodprice }}</span></p>
+              <p>Quantity: {{ i.qty }}</p>
+              <p>{{ i.product.foodinfo|truncatewords:10 }}</p>
+              {% if i.status == "Delivered" %}
+                <span class="status-badge delivered">Delivered</span>
+              {% else %}
+                <span class="status-badge pending">Pending</span>
+              {% endif %}
+            </div>
           </div>
-          <div class="price">₹{{ i.product.foodprice|floatformat:2 }}</div>
+        {% endfor %}
+      {% else %}
+        <div class="alert alert-info text-center">
+          You haven't placed any orders yet.
         </div>
-      {% endfor %}
-    {% else %}
-      <div class="alert alert-info text-center" style="max-width: 400px; margin: 4rem auto;">
-        You haven't placed any orders yet.
-      </div>
-    {% endif %}
-  </main>
-
+      {% endif %}
+    </main>
+  </div>
 </div>
 
 </body>
