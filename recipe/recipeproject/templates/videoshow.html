@@ -14,6 +14,22 @@
       font-family: 'Poppins', sans-serif;
       color: #2c3e50;
     }
+@media (max-width: 576px) {
+  .video-description {
+    max-height: 140px;        
+    overflow-y: auto;        
+    padding-right: 6px;        
+  }
+
+  .video-description::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .video-description::-webkit-scrollbar-thumb {
+    background-color: #ff5252;
+    border-radius: 10px;
+  }
+}
 
     .container-wrapper {
       min-height: 100vh;
@@ -33,11 +49,20 @@
       animation: fadeInUp 0.6s ease;
     }
 
-    .video-wrapper iframe {
+    .video-wrapper {
+      position: relative;
       width: 100%;
-      height: 450px;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border: none;
-      display: block;
     }
 
     .info-section {
@@ -71,6 +96,7 @@
       margin-top: 30px;
       display: flex;
       gap: 15px;
+      flex-wrap: wrap;
     }
 
     .btn-main {
@@ -113,6 +139,32 @@
       }
     }
 
+    /* Responsive */
+    @media (max-width: 768px) {
+      .info-section {
+        padding: 20px;
+      }
+
+      .info-header h4 {
+        font-size: 1.2rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn-main, .btn-outline {
+        width: 100%;
+        text-align: center;
+      }
+
+      .info-header img {
+        width: 50px;
+      }
+    }
+
+    /* Navbar styles (same as yours) */
     .navbar {
       font-family: 'Segoe UI', sans-serif;
       background-color: #1d1407;
@@ -153,7 +205,6 @@
       flex-grow: 1;
       max-width: 450px;
       margin-right: 20px;
-      
     }
 
     .search-input {
@@ -186,7 +237,6 @@
       color: #ff7043;
     }
 
-   
     .offcanvas a {
       display: block;
       padding: 10px 0;
@@ -209,19 +259,17 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg sticky-top py-3 px-3">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top py-3 px-3">
   <div class="container-fluid">
-
     <a class="navbar-brand" href="/">
       <img src="{% static 'src/logo-removebg-preview (2).png' %}" alt="Logo">
       Tastytales
     </a>
-
     <button class="navbar-toggler bg-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-   <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end align-items-center w-100">
+    <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end align-items-center w-100">
       <ul class="navbar-nav me-auto ms-5">
         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="/recipe">Recipes</a></li>
@@ -229,18 +277,16 @@
         <li class="nav-item"><a class="nav-link" href="/orderfood">Order Food</a></li>
         <li class="nav-item"><a class="nav-link" href="/books">Recipe Books</a></li>
       </ul>
-
-      
       <form class="d-flex search-form" id="searchf">
         <input class="form-control search-input" type="search" placeholder="Search recipes..." id="searchs">
         <button class="btn search-button" type="submit" id="searchb">Search</button>
       </form>
-
       <a href="/profile" class="user-icon ms-3"><i class="fa-solid fa-user"></i></a>
     </div>
   </div>
 </nav>
 
+<!-- Mobile Menu -->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title">Menu</h5>
@@ -260,56 +306,40 @@
   </div>
 </div>
 
-  <div class="container-wrapper">
-    <div class="card-video">
-      
-      <div class="video-wrapper">
-        <iframe src="{{ data.0.videoSrc }}"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-        </iframe>
+<!-- Video Section -->
+<div class="container-wrapper">
+  <div class="card-video">
+    <div class="video-wrapper">
+      <iframe src="{{ data.0.videoSrc }}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    </div>
+
+    <div class="info-section">
+      <div class="info-header">
+        <img src="{% static 'src/logo-removebg-preview (2).png' %}" alt="TastyTales Logo">
+        <div>
+          <h4>{{ data.0.foodname }}</h4>
+          <small class="text-muted">from <strong>TastyTales</strong></small>
+        </div>
       </div>
 
-    
-      <div class="info-section">
-        <div class="info-header">
-          <img src="{% static 'src/logo-removebg-preview (2).png' %}" alt="TastyTales Logo">
-          <div>
-            <h4>{{ data.0.foodname }}</h4>
-            <small class="text-muted">from <strong>TastyTales</strong></small>
-          </div>
-        </div>
+      <p class="video-description">{{ data.0.foodinfo }}</p>
 
-        <p class="video-description">{{ data.0.foodinfo }}</p>
-
-      
-        <div class="action-buttons">
-          <a href="/video">
-            <button class="btn-main">
-              <i class="fas fa-play-circle me-1"></i> More Recipe Videos
-            </button>
-          </a>
-
-          <a href="/addlikeitemv/{{data.0.id}}">
-            <button class="btn-outline">
-              <i class="fas fa-heart me-1"></i> Add to Wishlist
-            </button>
-          </a>
-        </div>
+      <div class="action-buttons">
+        <a href="/video"><button class="btn-main"><i class="fas fa-play-circle me-1"></i> More Recipe Videos</button></a>
+        <a href="/addlikeitemv/{{data.0.id}}"><button class="btn-outline"><i class="fas fa-heart me-1"></i> Add to Wishlist</button></a>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="bg-dark text-light pt-5 pb-4 mt-5">
+<!-- Footer -->
+<div class="bg-dark text-light pt-5 pb-4 mt-5">
   <div class="container text-md-left">
     <div class="row text-md-left d-flex justify-content-between flex-wrap">
-      
-
       <div class="col-md-3 mb-4">
         <h3 class="fw-bold text-uppercase mb-3">TASTYTALES</h3>
         <p>Your daily dose of delicious recipes, curated by food lovers, for food lovers.</p>
       </div>
-
       <div class="col-md-2 mb-4">
         <h5 class="text-uppercase fw-semibold mb-3">Company</h5>
         <ul class="list-unstyled">
@@ -319,8 +349,6 @@
           <li><a href="privacy" class="text-light text-decoration-none">Privacy Policy</a></li>
         </ul>
       </div>
-
-  
       <div class="col-md-3 mb-4">
         <h5 class="text-uppercase fw-semibold mb-3">Contact</h5>
         <ul class="list-unstyled">
@@ -328,8 +356,6 @@
           <li class="d-flex align-items-center"><i class="fa-solid fa-envelope me-2"></i>support@tastytales.com</li>
         </ul>
       </div>
-
- 
       <div class="col-md-3 mb-4">
         <h5 class="text-uppercase fw-semibold mb-3">Follow Us</h5>
         <div class="d-flex gap-3">
@@ -340,7 +366,6 @@
         </div>
       </div>
     </div>
-
     <hr class="border-secondary mt-4" />
     <div class="text-center">
       <p class="mb-0">&copy; 2025 Tastytales. All rights reserved.</p>
@@ -348,22 +373,20 @@
   </div>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchs');
+    const searchButton = document.getElementById('searchb');
+
+    searchButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      const query = encodeURIComponent(searchInput.value.trim());
+      if (query) {
+        window.location.href = `${window.location.origin}/searchfood/${query}/`;
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded',()=>{
-      let searchinput = document.getElementById('searchs')
-      let searchbutton = document.getElementById('searchb')
-    
-      searchbutton.addEventListener('click',(e)=>{
-         event.preventDefault();
-        let query = encodeURIComponent(searchinput.value.trim());
-        if (query) {
-            window.location.href = `${window.location.origin}/searchfood/${query}/`;
-        }
-    });
-});
-
-</script>

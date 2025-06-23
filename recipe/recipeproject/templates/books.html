@@ -4,100 +4,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TastyTales</title>
+  <title>TastyTales</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="shortcut icon" href="{% static 'src/logo-removebg-preview (2).png' %}" type="image/x-icon">
   <script src="{% static 'script.js' %}"></script>
   <style>
-    .containers_book {
-      background-color: #f8f9fa;
-      padding: 30px 60px;
-    }
-
-    .recipe-card {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      padding: 15px;
-      margin-bottom: 20px;
-      gap: 15px;
-      width: 100%;
-      background-color: #fff;
-    }
-
-    .recipe-card img {
-      width: 200px;
-      height: 200px;
-      object-fit: contain;
-      border-radius: 8px;
-    }
-
-    .recipe-info {
-      flex: 1;
-    }
-
-    .recipe-info h5 {
-      font-size: 1.2rem;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: #333;
-    }
-
-    .recipe-info p {
-      margin: 0;
-      color: #555;
-      font-size: 0.95rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .recipe-price {
-      font-weight: bold;
-      color: #e74c3c;
-      margin-top: 8px;
-      font-size: 1rem;
-    }
-
-    .view_pro {
-      margin: 10px 0;
-      padding: 0;
-      height: 45px;
-      width: 160px;
-      background-color: #c2d705;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .view_pro:hover {
-      background-color: #b5c404;
-      transform: scale(1.03);
-    }
-
-    .view_pro p {
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      font-size: 16px;
-      color: #ffffff;
-      margin: 0;
-    }
-
-    .view_pro a {
-      text-decoration: none;
-    }
-           
-
+      h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #333;
+  margin: 30px 0;
+  margin-bottom: 3px;
+}
 
     .navbar {
       font-family: 'Segoe UI', sans-serif;
@@ -172,30 +93,121 @@
       color: #ff7043;
     }
 
-   
-    .offcanvas a {
-      display: block;
-      padding: 10px 0;
-      font-weight: 500;
-      color: #222;
-      text-decoration: none;
+
+    .containers_book {
+      background-color: #f8f9fa;
+      padding: 30px 20px;
+    }
+
+    .recipe-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 15px;
+      gap: 15px;
+      width: 100%;
+      background-color: #fff;
+      height: 100%;
+    }
+
+    .recipe-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .recipe-info {
+      flex: 1;
+    }
+
+    .recipe-info h5 {
       font-size: 1.1rem;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
     }
 
-    .offcanvas a:hover {
-      color: #ff5722;
+    .recipe-info p {
+      margin: 0;
+      color: #555;
+      font-size: 0.9rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    @media (max-width: 991.98px) {
-      .search-form {
-        margin: 10px 0;
+    .recipe-price {
+      font-weight: bold;
+      color: #e74c3c;
+      margin-top: 8px;
+      font-size: 1rem;
+    }
+
+    .view_pro {
+      margin-top: 10px;
+      height: 40px;
+      width: 130px;
+      background-color: #c2d705;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s ease;
+    }
+
+    .view_pro:hover {
+      background-color: #b5c404;
+      transform: scale(1.03);
+    }
+
+    .view_pro p {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 15px;
+      color: #fff;
+      margin: 0;
+    }
+
+    .view_pro a {
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .recipe-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .recipe-card img {
+        width: 100%;
+        height: auto;
+        max-height: 160px;
+      }
+
+      .recipe-info {
+        width: 100%;
+      }
+
+      .recipe-info h5 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .containers_book .row > div {
+        width: 50%;
+        padding: 10px;
       }
     }
-  
-
   </style>
 </head>
-
 <body>
 
   <nav class="navbar navbar-expand-lg sticky-top py-3 px-3">
@@ -249,39 +261,33 @@
   </div>
 </div>
 
-  <div class="containers_book">
-    <div class="row">
-      {% for i in data %}
-           <div class="col-md-6">
-            
-        <div class="recipe-card">
-          <img src="{% static 'webimg/' %}{{ i.foodimg }}" alt="{{ i.foodname }}">
-          <div class="recipe-info">
-            <h5>{{ i.foodname }}</h5>
-            <p>{{ i.foodinfo }}</p>
-            <div class="recipe-price">₹{{ i.foodprice }}</div>
-            <button class="view_pro">
-              <a href="ordershow/{{i.id}}"><p>View Book</p></a>
-            </button>
-          </div>
+<div class="containers_book">
+  <div class="row">
+    {% for i in data %}
+    <div class="col-md-6 mb-4">
+      <div class="recipe-card">
+        <img src="{% static 'webimg/' %}{{ i.foodimg }}" alt="{{ i.foodname }}">
+        <div class="recipe-info">
+          <h5>{{ i.foodname }}</h5>
+          <p>{{ i.foodinfo }}</p>
+          <div class="recipe-price">₹{{ i.foodprice }}</div>
+          <button class="view_pro">
+            <a href="ordershow/{{i.id}}"><p>View Book</p></a>
+          </button>
         </div>
-  
       </div>
-      
-      {% endfor %}
     </div>
+    {% endfor %}
   </div>
-  
-  <div class="bg-dark text-light pt-5 pb-4 mt-5">
+</div>
+
+<div class="bg-dark text-light pt-5 pb-4 mt-5">
   <div class="container text-md-left">
     <div class="row text-md-left d-flex justify-content-between flex-wrap">
-      
-
       <div class="col-md-3 mb-4">
         <h3 class="fw-bold text-uppercase mb-3">TASTYTALES</h3>
         <p>Your daily dose of delicious recipes, curated by food lovers, for food lovers.</p>
       </div>
-
       <div class="col-md-2 mb-4">
         <h5 class="text-uppercase fw-semibold mb-3">Company</h5>
         <ul class="list-unstyled">
@@ -291,8 +297,6 @@
           <li><a href="privacy" class="text-light text-decoration-none">Privacy Policy</a></li>
         </ul>
       </div>
-
-  
       <div class="col-md-3 mb-4">
         <h5 class="text-uppercase fw-semibold mb-3">Contact</h5>
         <ul class="list-unstyled">
@@ -300,8 +304,6 @@
           <li class="d-flex align-items-center"><i class="fa-solid fa-envelope me-2"></i>support@tastytales.com</li>
         </ul>
       </div>
-
- 
       <div class="col-md-3 mb-4">
         <h5 class="text-uppercase fw-semibold mb-3">Follow Us</h5>
         <div class="d-flex gap-3">
@@ -312,28 +314,26 @@
         </div>
       </div>
     </div>
-
     <hr class="border-secondary mt-4" />
     <div class="text-center">
       <p class="mb-0">&copy; 2025 Tastytales. All rights reserved.</p>
     </div>
   </div>
 </div>
-</body>
-</html>
 
 <script>
   document.addEventListener('DOMContentLoaded',()=>{
-      let searchinput = document.getElementById('searchs')
-      let searchbutton = document.getElementById('searchb')
-    
-      searchbutton.addEventListener('click',(e)=>{
-         event.preventDefault();
-        let query = encodeURIComponent(searchinput.value.trim());
-        if (query) {
-            window.location.href = `${window.location.origin}/searchfood/${query}/`;
-        }
+    let searchinput = document.getElementById('searchs')
+    let searchbutton = document.getElementById('searchb')
+    searchbutton.addEventListener('click',(e)=>{
+      event.preventDefault();
+      let query = encodeURIComponent(searchinput.value.trim());
+      if (query) {
+        window.location.href = `${window.location.origin}/searchfood/${query}/`;
+      }
     });
-});
-
+  });
 </script>
+
+</body>
+</html>
