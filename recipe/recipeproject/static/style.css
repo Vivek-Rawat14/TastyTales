@@ -317,6 +317,11 @@ li{
     font-weight: 600;
     color: #34495e;
     margin: 0 0 8px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .desc {
@@ -378,3 +383,24 @@ li{
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.offcanvas {
+    background-color: rgb(39, 29, 29);
+  
+}
+
+    .offcanvas a {
+      display: block;
+      padding: 10px 0;
+      font-weight: 500;
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .offcanvas a:hover {
+      color: #ff5722;
+    }
+    .offcanvas-title{
+        color: white;
+    }

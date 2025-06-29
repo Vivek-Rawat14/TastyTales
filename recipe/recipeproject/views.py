@@ -16,9 +16,6 @@ def homepage(req):
     ca = response.json()["recipes"]
     db =recipes.objects.filter(category="topfood").values()
     cl= list(db)
-    for i in cl:
-             i.update({'foodimg': i['foodimg'].split('_')[
-                0]+i['foodimg'].split('_')[1][-4:]})
     d = recipes.objects.filter(category='videos').values()
     c=list(d)
     b = recipes.objects.filter(category='books')
@@ -68,8 +65,6 @@ def books(req):
 def orderfood(req):
     a = recipes.objects.filter(category='topfood').values()
     cl = list(a)
-    for i in cl:
-             i.update({'foodimg': i['foodimg'].split('_')[0] + i['foodimg'].split('_')[1][-4:]})
     return render(req,'orderfood.html',context={'data':cl})
 
 def ordershow(req,Id):
@@ -77,13 +72,7 @@ def ordershow(req,Id):
      b = list(a)
      return render(req,'ordershow.html',context={'data':b})
 
-def buyconto(req,Id):
-    db =recipes.objects.filter(id=Id).values()
-    cl= list(db)
-    for i in cl:
-             i.update({'foodimg': i['foodimg'].split('_')[
-                0]+i['foodimg'].split('_')[1][-4:]})
-    return render(req,'byconto.html',context={"data":cl})
+
      
 
 def burger(req):

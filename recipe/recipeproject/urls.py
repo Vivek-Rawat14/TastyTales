@@ -18,7 +18,6 @@ urlpatterns = [
     path('sweet', views.sweet),
     path('northfood', views.northfood),
     path('southfood', views.southfood),
-    path('buyconto/<int:Id>',views.buyconto),
     path('signup',views.signup),
     path('login',views.login),
     path('profile',views.profile),
