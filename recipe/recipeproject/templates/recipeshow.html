@@ -12,153 +12,8 @@
   <link rel="icon" href="{% static 'src/logo-removebg-preview (2).png' %}" type="image/png" />
 
   <style>
-    * { box-sizing: border-box; }
-    body {
-      background: linear-gradient(135deg, #fff0f5, #ffffff);
-      font-family: 'Segoe UI', sans-serif;
-    }
-@media (max-width: 768px) {
-  .container-card {
-    flex-direction: column;
-    border-radius: 0;
-    margin: 1rem;
-  }
 
-  .image-side {
-    max-height: 220px;
-  }
-
-  .info-side {
-    padding: 1.2rem;
-  }
-
-  .info-side h2 {
-    font-size: 1.5rem;
-  }
-
-  .btn-rounded,
-  .btn-outline-secondary {
-    width: 100%;
-    text-align: center;
-    padding: 0.8rem 1.2rem;
-    font-size: 1rem;
-  }
-
-  .oks {
-    flex-direction: column;
-    gap: 0.75rem !important;
-  }
-
-  .scroll-area {
-    max-height: 250px;
-  }
-
-  .ingredient-pill {
-    font-size: 0.8rem;
-    padding: 5px 10px;
-  }
-}
-    .container-card {
-      max-width: 1140px;
-      margin: 3rem auto;
-      background: #fff;
-      border-radius: 1.25rem;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
-      display: flex;
-      overflow: hidden;
-      flex-wrap: wrap;
-    }
-
-    .image-side {
-      flex: 1 1 400px;
-      max-height: 500px;
-      overflow: hidden;
-    }
-
-    .image-side img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .info-side {
-      flex: 1 1 600px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .info-side h2 {
-      font-weight: bold;
-      font-size: 2rem;
-      color: #d63384;
-    }
-
-    .badge-group {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .scroll-area {
-      max-height: 280px;
-      overflow-y: auto;
-      margin-top: 1rem;
-      padding-right: 0.5rem;
-    }
-
-    .scroll-area::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .scroll-area::-webkit-scrollbar-thumb {
-      background: #d63384;
-      border-radius: 10px;
-    }
-
-    .ingredient-pill {
-      background-color: #f1f3f5;
-      border: 1px solid #dee2e6;
-      padding: 6px 14px;
-      border-radius: 50px;
-      margin: 5px 5px 0 0;
-      font-size: 0.875rem;
-      color: #495057;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    }
-
-    .btn-rounded {
-      background: #d63384;
-      color: white;
-      padding: 0.6rem 1.6rem;
-      border-radius: 50px;
-      font-weight: 500;
-      border: none;
-      transition: all 0.3s ease;
-    }
-
-    .btn-rounded:hover {
-      background: #c01c70;
-    }
-
-    .btn-outline-secondary {
-      border-radius: 50px;
-      padding: 0.6rem 1.6rem;
-      font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
-      .container-card {
-        flex-direction: column;
-      }
-      .image-side {
-        max-height: 250px;
-      }
-    }
-
-    .navbar {
+ .navbar {
       font-family: 'Segoe UI', sans-serif;
       background-color: #1d1407;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
@@ -198,7 +53,6 @@
       flex-grow: 1;
       max-width: 450px;
       margin-right: 20px;
-      
     }
 
     .search-input {
@@ -231,7 +85,6 @@
       color: #ff7043;
     }
 
-   
     .offcanvas a {
       display: block;
       padding: 10px 0;
@@ -244,17 +97,172 @@
     .offcanvas a:hover {
       color: #ff5722;
     }
+    .container-card {
+      max-width: 1140px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 1.25rem;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      flex-wrap: wrap;
+    }
 
-    @media (max-width: 991.98px) {
-      .search-form {
-        margin: 10px 0;
+    .image-side {
+      flex: 1 1 45%;
+      max-height: 500px;
+      overflow: hidden;
+    }
+
+    .image-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info-side {
+      flex: 1 1 55%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .info-side h2 {
+      font-weight: bold;
+      font-size: 2rem;
+      color: #d63384;
+    }
+
+    .badge-group {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .scroll-area {
+      max-height: 260px;
+      overflow-y: auto;
+      margin-top: 1rem;
+      padding-right: 0.5rem;
+    }
+
+    .scroll-area::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .scroll-area::-webkit-scrollbar-thumb {
+      background: #d63384;
+      border-radius: 10px;
+    }
+
+    .ingredient-pill {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin: 5px 5px 0 0;
+      font-size: 0.9rem;
+      color: #495057;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .oks {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-rounded {
+      background: #d63384;
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 500;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-rounded:hover {
+      background: #c01c70;
+    }
+
+    .btn-outline-secondary {
+      border-radius: 50px;
+      padding: 0.6rem 1.4rem;
+      font-weight: 500;
+    }
+
+    /* Mobile & Tablet View */
+    @media (max-width: 992px) {
+      .container-card {
+        flex-direction: column;
+        border-radius: 12px;
+        margin: 1rem;
+      }
+
+      .image-side {
+        max-height: 240px;
+        height: auto;
+      }
+
+      .info-side {
+        padding: 1.5rem;
+      }
+
+      .info-side h2 {
+        font-size: 1.5rem;
+      }
+
+      .ingredient-pill {
+        font-size: 0.78rem;
+        padding: 5px 10px;
+      }
+
+      .scroll-area {
+        max-height: 200px;
+      }
+
+      .oks {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .btn-rounded,
+      .btn-outline-secondary {
+        width: 100%;
+        text-align: center;
       }
     }
 
-    .oks{
-      margin-top:-20px
-    }
+    @media (max-width: 576px) {
+      .info-side h2 {
+        font-size: 1.3rem;
+      }
 
+      .scroll-area {
+        max-height: 180px;
+      }
+
+      .ingredient-pill {
+        font-size: 0.72rem;
+        padding: 4px 9px;
+      }
+
+      .btn-rounded,
+      .btn-outline-secondary {
+        font-size: 0.92rem;
+        padding: 0.55rem 1rem;
+      }
+
+      ol.ps-3 {
+        padding-left: 1rem !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -312,6 +320,7 @@
 
 
 
+
 <div class="container-card">
   <div class="image-side">
     <img src="{{ data.image }}" alt="Recipe Image">
@@ -322,38 +331,26 @@
       <h2>{{ data.name }}</h2>
 
       <div class="badge-group">
-        {% if data.difficulty %}
-        <span class="badge bg-secondary"><i class="fas fa-tachometer-alt me-1"></i> {{ data.difficulty }}</span>
-        {% endif %}
-        {% if data.calories %}
-        <span class="badge bg-danger"><i class="fas fa-fire me-1"></i> {{ data.calories }} cal</span>
-        {% endif %}
-        {% if data.rating %}
-        <span class="badge bg-warning text-dark"><i class="fas fa-star me-1"></i> {{ data.rating }}</span>
-        {% endif %}
-        {% if data.mealType %}
-        <span class="badge bg-info text-dark"><i class="fas fa-utensils me-1"></i> {{ data.mealType }}</span>
-        {% endif %}
+        {% if data.difficulty %}<span class="badge bg-secondary"><i class="fas fa-tachometer-alt me-1"></i> {{ data.difficulty }}</span>{% endif %}
+        {% if data.calories %}<span class="badge bg-danger"><i class="fas fa-fire me-1"></i> {{ data.calories }} cal</span>{% endif %}
+        {% if data.rating %}<span class="badge bg-warning text-dark"><i class="fas fa-star me-1"></i> {{ data.rating }}</span>{% endif %}
+        {% if data.mealType %}<span class="badge bg-info text-dark"><i class="fas fa-utensils me-1"></i> {{ data.mealType }}</span>{% endif %}
       </div>
 
       <div class="scroll-area">
         <h6 class="mt-4">🧂 Ingredients</h6>
         <div class="d-flex flex-wrap">
-          {% for i in data.ingredients %}
-            <span class="ingredient-pill">{{ i }}</span>
-          {% endfor %}
+          {% for i in data.ingredients %}<span class="ingredient-pill">{{ i }}</span>{% endfor %}
         </div>
 
         <h6 class="mt-4">📋 Instructions</h6>
         <ol class="ps-3">
-          {% for i in data.instructions %}
-            <li class="mb-2">{{ i }}</li>
-          {% endfor %}
+          {% for i in data.instructions %}<li class="mb-2">{{ i }}</li>{% endfor %}
         </ol>
       </div>
     </div>
 
-    <div class="d-flex gap-3 mt-4 oks" >
+    <div class="oks">
       <a href="/addlikeitemrs/{{ data.id }}" class="btn btn-rounded">
         <i class="fas fa-heart me-2"></i> Add to Wishlist
       </a>
@@ -413,4 +410,8 @@
 </div>
 </body>
 </html>
+
+
+
+
 
