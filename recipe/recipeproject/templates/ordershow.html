@@ -178,9 +178,10 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
-    <form class="d-flex mb-3">
-      <input class="form-control" type="search" placeholder="Search...">
-      <button class="btn btn-warning ms-2" type="submit">Search</button>
+
+       <form class="d-flex mb-3">
+      <input class="form-control" type="search" placeholder="Search recipes video,books,food..."id="searchss">
+      <button class="btn btn-warning ms-2" type="submit" id="searchbb">Search</button>
     </form>
     <a href="/">🏠 Home</a>
     <a href="/recipe">🥘 Recipes</a>
@@ -303,5 +304,19 @@
         }
     });
 });
+
+  document.addEventListener('DOMContentLoaded',()=>{
+      let searchinput = document.getElementById('searchss')
+      let searchbutton = document.getElementById('searchbb')
+    
+      searchbutton.addEventListener('click',(e)=>{
+         event.preventDefault();
+        let query = encodeURIComponent(searchinput.value.trim());
+        if (query) {
+            window.location.href = `${window.location.origin}/searchfood/${query}/`;
+        }
+    });
+});
+
 
 </script>

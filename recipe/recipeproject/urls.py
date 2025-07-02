@@ -39,4 +39,5 @@ urlpatterns = [
     path('removerecipeitem/<int:Id>/', views.removerecipeitem), 
     path('removebuyitem/<int:Id>/', views.removebuyitem), 
     path('results', views.recipe_results, name='recipe_result'),
+     path('logout', views.logout, name='logout'),
 ]

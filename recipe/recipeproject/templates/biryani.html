@@ -5,12 +5,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <title>TastyTales</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" />
-  <link rel="stylesheet" href="{% static 'style.css' %}">
-  <link rel="shortcut icon" href="{% static 'src/logo-removebg-preview (2).png' %}" type="image/x-icon">
-  <script src="{% static 'script.js' %}"></script>
-          <style>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="shortcut icon" href="{% static 'src/logo-removebg-preview (2).png' %}" type="image/x-icon">          <style>
 
 
     .navbar {
@@ -136,10 +135,12 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
-    <form class="d-flex mb-3">
-      <input class="form-control" type="search" placeholder="Search...">
-      <button class="btn btn-warning ms-2" type="submit">Search</button>
+  
+       <form class="d-flex mb-3">
+      <input class="form-control" type="search" placeholder="Search recipes video,books,food..."id="searchss">
+      <button class="btn btn-warning ms-2" type="submit" id="searchbb">Search</button>
     </form>
+    
     <a href="/">🏠 Home</a>
     <a href="/recipe">🥘 Recipes</a>
     <a href="/video">🎥 Videos</a>
@@ -148,6 +149,7 @@
     <a href="/profile"><i class="fa-solid fa-user me-2"></i> Profile</a>
   </div>
 </div>
+
   <div class="container py-5">
     <div class="row">
           {%for i in data%}
@@ -234,5 +236,28 @@
         }
     });
 });
-
+  document.addEventListener('DOMContentLoaded',()=>{
+      let searchinput = document.getElementById('searchss')
+      let searchbutton = document.getElementById('searchbb')
+    
+      searchbutton.addEventListener('click',(e)=>{
+         event.preventDefault();
+        let query = encodeURIComponent(searchinput.value.trim());
+        if (query) {
+            window.location.href = `${window.location.origin}/searchfood/${query}/`;
+        }
+    });
+});
+  document.addEventListener('DOMContentLoaded',()=>{
+      let searchinput = document.getElementById('searchss')
+      let searchbutton = document.getElementById('searchbb')
+    
+      searchbutton.addEventListener('click',(e)=>{
+         event.preventDefault();
+        let query = encodeURIComponent(searchinput.value.trim());
+        if (query) {
+            window.location.href = `${window.location.origin}/searchfood/${query}/`;
+        }
+    });
+});
 </script>

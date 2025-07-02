@@ -5,10 +5,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TastyTales</title>
-   <link rel="stylesheet" href="{% static 'style.css' %}">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
   <style>
     :root {
       --main-color: #ff5f2e;
@@ -32,7 +33,7 @@
     .logo {
       font-size: 24px;
       font-weight: bold;
-      color: var(--main-color);
+      color:black;
       text-align: center;
       margin-bottom: 20px;
     }
@@ -51,116 +52,101 @@
       color: white;
     }
 
-     .order-card {
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 24px;
-    transition: box-shadow 0.3s ease;
-  }
-
-  .order-card:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
-  }
-
-  .order-img {
-    width: 160px;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 4 / 3;
-    display: block;
-    flex-shrink: 0;
-    background-color: #f2f2f2;
-  }
-
-  .order-content {
-    padding: 16px;
-    flex: 1;
-  }
-
-  .order-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 6px;
-    color: #333;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .order-info {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 6px;
-  }
-
-  .order-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .order-price {
-    font-weight: 600;
-    color: #ff5722;
-    font-size: 1.05rem;
-  }
-
-  .order-status {
-    padding: 4px 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    border-radius: 50px;
-    white-space: nowrap;
-  }
-
-  .delivered {
-    background: #e6f4ea;
-    color: #34a853;
-  }
-
-  .pending {
-    background: #fff4e5;
-    color: #ff9800;
-  }
-
-  .btn-cancel {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    padding: 4px 12px;
-    font-size: 0.8rem;
-    border-radius: 20px;
-    transition: background-color 0.2s ease;
-  }
-
-  .btn-cancel:hover {
-    background-color: #f1b0b7;
-    color: #721c24;
-  }
-
-  @media (max-width: 576px) {
     .order-card {
-      flex-direction: column;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 24px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .order-card:hover {
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
     }
 
     .order-img {
-      width: 100%;
-      height: auto;
+      width: 160px;
+      height: 100%;
+      object-fit: cover;
       aspect-ratio: 4 / 3;
+      display: block;
+      flex-shrink: 0;
+      background-color: #f2f2f2;
+    }
+
+    .order-content {
+      padding: 16px;
+      flex: 1;
+    }
+
+    .order-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #222;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .order-info {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 6px;
     }
 
     .order-bottom {
-      flex-direction: column;
-      align-items: flex-start;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-  }
+
+    .order-price {
+      font-weight: 600;
+      color: #ff5722;
+      font-size: 1.05rem;
+    }
+
+    .btn-cancel {
+      background-color: #fff0f0;
+      color: #dc3545;
+      border: 1px solid #f5c6cb;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      border-radius: 30px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-cancel:hover {
+      background-color: #f8d7da;
+      color: #c82333;
+      border-color: #f1b0b7;
+    }
+
+    @media (max-width: 576px) {
+      .order-card {
+        flex-direction: column;
+      }
+
+      .order-img {
+        width: 100%;
+        height: auto;
+      }
+
+      .order-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
 
     @media (max-width: 768px) {
       .sidebar {
@@ -212,10 +198,10 @@
   </div>
 </div>
 
-<!-- Layout -->
+
 <div class="container-fluid">
   <div class="row">
-    <!-- Desktop Sidebar -->
+   
     <div class="col-md-3 d-none d-md-block sidebar">
       <div class="logo">TastyTales</div>
       <a href="/" class="nav-link">Homepage</a>
@@ -227,47 +213,42 @@
       <a href="/logout" class="nav-link">Logout</a>
     </div>
 
-<main class="col-md-9 p-4">
-  <h2 class="text-center mb-4">🛒 Your Orders</h2>
+    <main class="col-md-9 p-4">
+      <h2 class="text-center mb-4">🛒 Your Orders</h2>
 
-  {% if data %}
-    {% for i in data %}
-      <div class="order-card">
-        <img src="{% static 'webimg/' %}{{ i.product.foodimg }}" class="order-img" alt="{{ i.product.foodname }}">
-        <div class="order-content">
-          <div class="order-title">{{ i.product.foodname }}</div>
-          <div class="order-info">Quantity: {{ i.qty }}</div>
-          <div class="order-info">{{ i.product.foodinfo|truncatewords:12 }}</div>
+      {% if data %}
+        {% for i in data %}
+          <div class="order-card">
+            <img src="{% static 'webimg/' %}{{ i.product.foodimg }}" class="order-img" alt="{{ i.product.foodname }}">
+            <div class="order-content">
+              <div class="order-title">{{ i.product.foodname }}</div>
+              <div class="order-info">Quantity: {{ i.qty }}</div>
+              <div class="order-info">{{ i.product.foodinfo|truncatewords:12 }}</div>
 
-          <div class="order-bottom">
-            <div class="order-price">₹{{ i.product.foodprice }}</div>
-<form method="POST" action="/removebuyitem/{{ i.product.id }}/" onsubmit="return confirm('Remove this item from cart?')">
-  {% csrf_token %}
-  <button class="btn btn-outline-danger btn-sm">Remove</button>
-</form>
-
-
-          
+              <div class="order-bottom">
+                <div class="order-price">₹{{ i.product.foodprice }}</div>
+                <form method="POST" action="/removebuyitem/{{ i.product.id }}/" onsubmit="return confirm('Remove this item from cart?')">
+                  {% csrf_token %}
+                  <button class="btn btn-cancel">
+                    <i class="bi bi-trash"></i>Cancel order
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
+        {% endfor %}
+      {% else %}
+        <div class="text-center mt-5">
+          <img src="{% static 'webimg/empty-cart.png' %}" alt="Empty Cart" style="max-width: 200px;" class="mb-3">
+          <h5 class="text-muted">You haven't placed any orders yet.</h5>
+          <a href="/" class="btn btn-outline-primary mt-3">
+            <i class="bi bi-arrow-left-circle"></i> Browse Foods
+          </a>
         </div>
-      </div>
-    {% endfor %}
-  {% else %}
-    <div class="alert alert-info text-center">
-      You haven't placed any orders yet.
-    </div>
-  {% endif %}
-</main>
-
+      {% endif %}
+    </main>
   </div>
 </div>
 
 </body>
 </html>
-<script>
-  function confirmCancel(event) {
-    if (!confirm("Are you sure you want to cancel this order?")) {
-      event.preventDefault(); // Stop form from submitting
-    }
-  }
-</script>

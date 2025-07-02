@@ -528,3 +528,9 @@ def recipe_results(request):
             print("API error:", e)
 
     return render(request, 'results.html', {'recipes': recipes, 'query': query})
+
+
+def logout(request):
+    if 'user' in request.session:
+        del request.session['user'] 
+    return redirect('/login')  
