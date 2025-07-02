@@ -278,26 +278,27 @@
       </ul>
 
       
-      <form class="d-flex search-form" id="searchf">
-        <input class="form-control search-input" type="search" placeholder="Search recipes..." id="searchs">
-        <button class="btn search-button" type="submit" id="searchb">Search</button>
-      </form>
+  <form class="d-flex search-form" method="get" action="{% url 'recipe_result' %}">
+  <input class="form-control search-input me-2" type="search" placeholder="Search only recipe food..." name="q" required>
+  <button class="btn search-button btn-primary" type="submit">Search</button>
+</form>
+
 
       <a href="/profile" class="user-icon ms-3"><i class="fa-solid fa-user"></i></a>
     </div>
   </div>
 </nav>
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" style="  background-color: rgb(39, 29, 29);">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title">Menu</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
-    <form class="d-flex mb-3">
-      <input class="form-control" type="search" placeholder="Search...">
-      <button class="btn btn-warning ms-2" type="submit">Search</button>
-    </form>
+<form class="d-flex mb-3" method="get" action="{% url 'recipe_result' %}">
+  <input class="form-control" type="search" name="q" placeholder="Search only recipe food..." required>
+  <button class="btn btn-warning ms-2" type="submit">Search</button>
+</form>
     <a href="/">🏠 Home</a>
     <a href="/recipe">🥘 Recipes</a>
     <a href="/video">🎥 Videos</a>

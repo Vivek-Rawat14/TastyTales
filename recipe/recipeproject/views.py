@@ -221,6 +221,34 @@ def videolike(req):
     except models.users.DoesNotExist:
         return redirect('/login')
 
+def removevideoitem(req, Id):
+    # Check if user is logged in
+    if 'user' not in req.session:
+        return redirect('/login')
+
+    try:
+        # Get the user object
+        user = models.users.objects.get(username=req.session['user'])
+
+        # Safely load the liked items list
+        try:
+            liked = json.loads(user.likesv or '[]')
+        except (json.JSONDecodeError, TypeError):
+            liked = []
+
+        # Remove the item if it exists in the list
+        if str(Id) in liked:
+            liked.remove(str(Id))
+            user.likesv = json.dumps(liked)
+            user.save()
+
+        # Redirect back to the like page
+        return redirect('/videolike')
+
+    except models.users.DoesNotExist:
+        # If user record is not found in DB, redirect to login
+        return redirect('/login')
+   
 
 def addlikeitemrs(req, Id):
     if 'user' not in req.session:
@@ -272,6 +300,34 @@ def recipelike(req):
         return redirect('/login')
 
 
+def removerecipeitem(req, Id):
+    # Check if user is logged in
+    if 'user' not in req.session:
+        return redirect('/login')
+
+    try:
+        # Get the user object
+        user = models.users.objects.get(username=req.session['user'])
+
+        # Safely load the liked items list
+        try:
+            liked = json.loads(user.likesr or '[]')
+        except (json.JSONDecodeError, TypeError):
+            liked = []
+
+        # Remove the item if it exists in the list
+        if str(Id) in liked:
+            liked.remove(str(Id))
+            user.likesr = json.dumps(liked)
+            user.save()
+
+        # Redirect back to the like page
+        return redirect('/recipelike')
+
+    except models.users.DoesNotExist:
+        # If user record is not found in DB, redirect to login
+        return redirect('/login')
+
 def addlikeitem(req, Id):
     if 'user' not in req.session:
         return redirect('/login')
@@ -294,6 +350,36 @@ def addlikeitem(req, Id):
         return redirect('/login')
 
 
+
+def removelikeitem(req, Id):
+    # Check if user is logged in
+    if 'user' not in req.session:
+        return redirect('/login')
+
+    try:
+        # Get the user object
+        user = models.users.objects.get(username=req.session['user'])
+
+        # Safely load the liked items list
+        try:
+            liked = json.loads(user.likes or '[]')
+        except (json.JSONDecodeError, TypeError):
+            liked = []
+
+        # Remove the item if it exists in the list
+        if str(Id) in liked:
+            liked.remove(str(Id))
+            user.likes = json.dumps(liked)
+            user.save()
+
+        # Redirect back to the like page
+        return redirect('/like')
+
+    except models.users.DoesNotExist:
+        # If user record is not found in DB, redirect to login
+        return redirect('/login')
+    
+
 def like(req):
     if 'user' not in req.session:
         return redirect('/homepage')
@@ -312,25 +398,6 @@ def like(req):
     except models.users.DoesNotExist:
         return redirect('/login')
 
-def addremoveitem(request, Id):
-    if request.method == 'POST':
-        username = request.session.get('user')
-        if not username:
-            return redirect('/login')
-
-        user = models.users.objects.get(username=username)
-
-        likeitems = json.loads(user.likes) if user.likes else []
-
-        try:
-            likeitems.remove(Id)
-        except ValueError:
-            pass  # item was not in list, ignore
-
-        user.likes = json.dumps(likeitems)
-        user.save()
-
-    return redirect('/like')
 
 
 def addbuyitem(req, Id):
@@ -356,7 +423,7 @@ def addbuyitem(req, Id):
         else:
             new_cart.append(item)
 
-    # Check if item already exists with same size
+ 
     found = False
     for item in new_cart:
         if item["id"] == Id :
@@ -402,6 +469,29 @@ def carts(req):
         return redirect('/login')
     
 
+def removebuyitem(req, Id):
+    if 'user' not in req.session:
+        return redirect('/login')
+
+    username = req.session['user']
+    try:
+        user = models.users.objects.get(username=username)
+        try:
+            cartitems = json.loads(user.cart or '[]')
+        except (TypeError, json.JSONDecodeError):
+            cartitems = []
+
+      
+        new_cart = [item for item in cartitems if str(item.get("id")) != str(Id)]
+
+        user.cart = json.dumps(new_cart)
+        user.save()
+
+        return redirect('/carts')
+
+    except models.users.DoesNotExist:
+        return redirect('/login')
+
 def searchfood(req,item):
     v = recipes.objects.all().values()
     filterdb = []
@@ -421,3 +511,20 @@ def terms(req):
 
 def privacy(req):
     return render(req,'privacy.html')
+
+
+
+
+def recipe_results(request):
+    query = request.GET.get('q', '')
+    recipes = []
+
+    if query:
+        try:
+            response = requests.get(f'https://dummyjson.com/recipes/search?q={query}')
+            data = response.json()
+            recipes = data.get('recipes', [])
+        except Exception as e:
+            print("API error:", e)
+
+    return render(request, 'results.html', {'recipes': recipes, 'query': query})

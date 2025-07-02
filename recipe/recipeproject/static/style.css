@@ -386,7 +386,6 @@ li{
 
 .offcanvas {
     background-color: rgb(39, 29, 29);
-  
 }
 
     .offcanvas a {
@@ -401,6 +400,8 @@ li{
     .offcanvas a:hover {
       color: #ff5722;
     }
+
     .offcanvas-title{
         color: white;
     }
+

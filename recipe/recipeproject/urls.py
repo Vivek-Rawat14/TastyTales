@@ -25,7 +25,7 @@ urlpatterns = [
     path('like',views.like),
     path('addlikeitemv/<int:Id>/', views.addlikeitemv, name='addlikeitem'),
     path('videolike',views.videolike),
-    path('addremoveitem/<int:Id>/', views.addremoveitem, name='addremoveitem'), 
+    path('removelikeitem/<int:Id>/', views.removelikeitem, name=' removelikeitem'), 
     path('addbuyitem/<int:Id>/', views.addbuyitem, name='addbuyitem'),
     path('carts/', views.carts, name='carts'),
     path('addlikeitemrs/<int:Id>/', views.addlikeitemrs),
@@ -35,4 +35,8 @@ urlpatterns = [
     path('terms',views.terms),
     path('privacy',views.privacy),
     path('support',views.support),
+    path('removevideoitem/<int:Id>/', views.removevideoitem), 
+    path('removerecipeitem/<int:Id>/', views.removerecipeitem), 
+    path('removebuyitem/<int:Id>/', views.removebuyitem), 
+    path('results', views.recipe_results, name='recipe_result'),
 ]
